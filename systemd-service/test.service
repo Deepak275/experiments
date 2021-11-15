@@ -1,0 +1,27 @@
+[Unit]
+Description=Cinema Mock
+ConditionPathExists=/root/mock/go-boilerplate/
+After=network.target
+ 
+[Service]
+Type=simple
+User=root
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+WorkingDirectory=/root/mock/go-boilerplate
+ExecStart=go run main.go
+
+# make sure log directory exists and owned by syslog
+PermissionsStartOnly=true
+ExecStartPre=/bin/mkdir -p /var/log/appservice
+ExecStartPre=/bin/chown syslog:adm /var/log/appservice
+ExecStartPre=/bin/chmod 755 /var/log/appservice
+StandardOutput=syslog
+StandardError=syslog
+ 
+[Install]
+WantedBy=multi-user.target

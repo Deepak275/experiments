@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2021-07-28T01:55:15Z"
+  labels:
+    app: nginx
+  name: nginx
+  namespace: my-ingress-app
+  resourceVersion: "2257"
+  uid: fade3f82-1da2-4e9a-82d7-bfc6d9181e9e
+spec:
+  clusterIP: 10.104.107.54
+  clusterIPs:
+  - 10.104.107.54
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
