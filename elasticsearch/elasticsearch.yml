@@ -1,0 +1,34 @@
+cluster.name: aps-bms-apm
+cluster.initial_master_nodes:
+  - in-apmlogs-es-ode-1.prod.aps.bookmyshow.org
+  - in-apmlogs-es-ode-2.prod.aps.bookmyshow.org
+  - in-apmlogs-es-ode-3.prod.aps.bookmyshow.org
+discovery.seed_hosts:
+  - in-apmlogs-es-ode-1.prod.aps.bookmyshow.org
+  - in-apmlogs-es-ode-2.prod.aps.bookmyshow.org
+  - in-apmlogs-es-ode-3.prod.aps.bookmyshow.org
+node.name: in-apmlogs-es-ode-2.prod.aps.bookmyshow.org
+node.max_local_storage_nodes: 1
+node.master: true
+node.data: true
+
+node.attr.data: hot
+
+path.data: /usr/share/elasticsearch/data
+path.logs: /usr/share/elasticsearch/logs
+
+transport.port: 9300
+transport.compress: true
+
+http.host: 10.28.236.42
+http.port: 9200
+
+
+network.bind_host: 0.0.0.0
+network.publish_host: 10.28.236.42
+network.host: 10.28.236.42
+
+bootstrap.memory_lock: true
+
+
+reindex.remote.whitelist: 10.1.6.44:9200

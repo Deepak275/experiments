@@ -1,0 +1,5 @@
+Commands for taking dump of mappings and index
+
+1. docker run --rm -ti -v /data:/tmp elasticdump/elasticsearch-dump   --input=http://IP:9200/indexname   --output=/tmp/index_map.json  --type=mapping --limit=9000
+
+2. docker run --rm -ti -v /data:/tmp elasticdump/elasticsearch-dump   --input=http://IP:9200/indexname   --output=/tmp/index_data.json  --type=data --limit=9000
