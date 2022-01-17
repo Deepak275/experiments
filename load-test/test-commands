@@ -1,0 +1,6 @@
+wrk -t40 -c40 -d300s http://sre-test-4-app-sit.accreditation/v1/users/4s
+
+./ghz --insecure --proto user.proto --call proto.UserService/GetOne -d '{"Id":"9s"}' in-sre-test-4-app.sit.aps1.bookmyshow.org:5001 --duration 300s -r 20
+
+
+grpcurl -d '{"Id":"5s"}' -proto user.proto -plaintext in-sre-test-4-app.accreditation:5001 proto.UserService/GetOne

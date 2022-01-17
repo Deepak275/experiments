@@ -3,3 +3,9 @@ Commands for taking dump of mappings and index
 1. docker run --rm -ti -v /data:/tmp elasticdump/elasticsearch-dump   --input=http://IP:9200/indexname   --output=/tmp/index_map.json  --type=mapping --limit=9000
 
 2. docker run --rm -ti -v /data:/tmp elasticdump/elasticsearch-dump   --input=http://IP:9200/indexname   --output=/tmp/index_data.json  --type=data --limit=9000
+
+
+Command for checking unassigned shards and the cause of input
+- curl  http://in-supporting-elastic-apm-1.sit.aps1.bookmyshow.org:9200/_cat/shards\?h=index,shard,prirep,state,unassigned.reason | grep UNASSIGNED 
+
+- curl -XGET in-supporting-elastic-apm-1.sit.aps1.bookmyshow.org:9200/_cluster/allocation/explain?pretty

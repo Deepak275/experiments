@@ -1,0 +1,17 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  generation: 1
+  name: mobile-web-app-lb
+  namespace: supporting
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: mobile-web-app-lb
+status:
+  currentHealthy: 2
+  desiredHealthy: 2
+  disruptionsAllowed: 0
+  expectedPods: 2
+  observedGeneration: 1
