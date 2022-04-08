@@ -21,4 +21,5 @@ for i in 0..(N/2-1) do
     a[j][N - 1 - i] = temp
   end
 end
+
 p a

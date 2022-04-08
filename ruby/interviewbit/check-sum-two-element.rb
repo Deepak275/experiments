@@ -9,14 +9,6 @@ require 'set'
 a = [11, 4, 17, -1, 5]
 sum = 16
 
-sum_hash = Set.new
-for i in 0..a.length-1 do
-  temp = sum - a[i]
-  if sum_hash.include?(temp)
-    p "element #{a[i]} and #{temp} gives the desired sum: #{sum}"
-  end
-  sum_hash.add(a[i])
-end
 
 
 #Most effiecient solution
@@ -44,6 +36,21 @@ def pair_sum(a, sum)
 end
 
 p pair_sum(a, sum)
+
+
+
+
+
+
+
+sum_hash = Set.new
+for i in 0..a.length-1 do
+  temp = sum - a[i]
+  if sum_hash.include?(temp)
+    p "element #{a[i]} and #{temp} gives the desired sum: #{sum}"
+  end
+  sum_hash.add(a[i])
+end
 
 
 # Time Complexity: O(nlogn) based on sort algo. 

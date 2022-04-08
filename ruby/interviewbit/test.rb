@@ -130,6 +130,24 @@
 
 
 
-for i in 10..1 do
-  puts "we are happy and we will get whatever we want :) " 
+# for i in 10..1 do
+#   puts "we are happy and we will get whatever we want :) " 
+# end
+
+a = [11, 4, 17, -1, 5]
+sum = 16
+
+l = 0
+r = a.length - 1
+
+
+while l < r
+ if a[l] + a [r] == sum
+  p l,r
+  l = l + 1
+ elsif a[l] + a [r] < sum
+   l = l + 1
+ else
+  r = r - 1
+ end
 end
