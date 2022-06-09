@@ -10,7 +10,7 @@ temp = Array.new(len, 0)
 for i in 0..len - 1 do
     # p i, a[i], temp[a[i]] if a[i] == 73
     if temp[a[i]] >= 1
-        a[i]
+        p a[i]
         break
     end
     temp[a[i]] += 1
