@@ -1,2 +1,37 @@
 
 ngrep -W byline  port 8090
+
+k get po -A  | grep uat | grep apiserver |awk '{print $1, $2}' | xargs -l bash -c 'kubectl get po $1 -n $0 -oyaml' | grep "namespace:"
+
+
+kubectl get ns | grep dev | grep -v -- '-im\|developers-internal' |  awk '{print $1}' | xargs -l bash -c 'kubectl set image deployment/kpiservices -n $0  kpiservices=interface.azurecr.io/kafkaservices:v20210723065648-qa --record'
+
+cat web-logs-raw| grep "coderbyte heroku/router" | grep MASKED | awk '{print $10}' |  sed  s/^request_id=// | awk '{print $1, "[M]"}'
+
+1. Remove blank lines
+	^[ \t]*$\r?\n
+2. Wrap multiple lines into one
+   search \n and repalce with empty stirng
+
+
+Check the space utilizaiton directory wise
+1. Run this to find the space  utilization by directory in the current directory
+   du -sh *
+2. To show most space taking root directory
+   sudo du -hsx /* | sort -rh | head -n 10
+3. to show first 5 directory utilizing most space
+   du -a --block-size=1G  | sort -n -r | head -n 5
+
+
+
+Take heap dump 
+1. With jcmd or jmap
+```
+$ cd /tmp
+$ curl -L https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.9%2B11_openj9-0.23.0/OpenJDK11U-jdk_x64_linux_openj9_11.0.9_11_openj9-0.23.0.tar.gz --output jdk.tgz
+$ tar -zxvf jdk.tgz
+$ jdk-11.0.9+11/bin/jps -l
+$ jdk-11.0.9+11/bin/jcmd 1 GC.heap_dump /tmp/heapdump_pzn.hprof
+Or with jmap
+$ jmap -dump:format=b,file=/tmp/heapdump_pzn.hprof 1
+```

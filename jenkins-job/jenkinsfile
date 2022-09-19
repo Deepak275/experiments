@@ -1,0 +1,277 @@
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+pipeline {
+    environment {
+        IMAGE_TAG = "v20220905084027-main"
+        response_body = ''
+    }
+    
+    agent { label 'Public-New-Oregon-Bastion' }
+    stages{
+        
+        stage('Initialize') {
+          steps {
+            // echo 0 == 0
+            script {
+                TAG = "1223"
+                env.IMAGE_TAG = "1233"
+                IMAGE_TAG = sh (script: 
+                    '''
+                      echo v$(date '+%Y%m%d%H%M%S')-main
+                    ''',
+                returnStdout: true).trim()
+            }
+          }
+        }
+        
+        stage('Build Image') {
+          steps {
+            echo 'build'
+            echo env.IMAGE_TAG
+            // build job: 'Build-Images', parameters: [
+            //   string(name: 'imagetag', value: "${IMAGE_TAG}"),
+            //   string(name: 'components', value: "kafkaServices"),
+            //   string(name: 'branch', value: "main"),
+            //   string(name: 'gitpull', value: "yes")
+            // ]
+          }
+          
+          post {
+            success { 
+                echo 'Job Success'
+        
+                build job: 'EmailTrigger', parameters: [
+                  string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                  string(name: 'EMAIL_SUBJECT', value: "SUCCESS: Jenkins job: ${JOB_NAME} Build (Build Number: ${BUILD_NUMBER})"),
+                  string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL}")
+                ]
+            }
+            failure {
+            
+                echo 'Job Failed :('
+                // env.response_body = "test"
+                build job: 'EmailTrigger', parameters: [
+                  string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                  string(name: 'EMAIL_SUBJECT', value: "Failed: Jenkins ${JOB_NAME} Image Build failed (Build Number: ${BUILD_NUMBER})"),
+                  string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL} \nFaiure cause: ${response_body}")
+                ]
+            }            
+          }
+        }
+        
+        stage ('Deploy To Platform(main) enviorment'){
+            steps {
+                    echo "${TAG}"
+                    sh 'echo "Deploy to platform"'
+                    // sh 'echo '''+IMAGE_TAG+'''
+                    sh '~/commands/switchContextDevUAT "platform-aicc-symitar"'
+                    // sh '''
+                    //   image='''+IMAGE_TAG+'''
+                    //   kubectl set image deployment/kpiservices -n platform-aicc-symitar kpiservices=interface.azurecr.io/kafkaservices:$image --record
+                    // '''
+            }
+            post {
+                success { 
+                    echo 'Job Success'
+            
+                    build job: 'EmailTrigger', parameters: [
+                      string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                      string(name: 'EMAIL_SUBJECT', value: "SUCCESS: Jenkins job: ${JOB_NAME} Platform deployment (Build Number: ${BUILD_NUMBER})"),
+                      string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL}")
+                    ]
+                }
+                failure {
+                
+                    echo 'Job Failed :('
+                    // env.response_body = "test"
+                    build job: 'EmailTrigger', parameters: [
+                      string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                      string(name: 'EMAIL_SUBJECT', value: "Failed: Jenkins ${JOB_NAME} Platform deployment failed (Build Number: ${BUILD_NUMBER})"),
+                      string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL} \nFaiure cause: ${response_body}")
+                    ]
+                }
+            }
+        }
+        
+        
+        stage ('Integration Test'){
+            // def response = ''
+            steps {
+                script {    
+                    // def response = ""
+                    sh 'echo "Calling bot-engine"'
+                    response = sh(script: '''\
+                    curl -s -k -o res.txt -w '%{http_code}' --location --request GET "https://run.mocky.io/v3/5113b586-2b78-4781-8a97-8cd118586ed6" -H "Accept:text/plain" --header 'Authorization: Bearer e680e668-363f-4c5f-90ff-44fcd1e3a84e' -vv\
+                    ''', returnStdout: true).trim()
+                    
+                    partial_failure = sh(script: '''cat res.txt | grep issue | echo $?''', returnStdout: true)
+                    
+                    sh(script: '''sed 's/"/\\\\"/g' res.txt > res2.txt ''')
+                    // sh 'cat res.txt'
+                    sh 'pwd'
+                    // response_body = 'integration test failed'
+                    response_body = sh(script: 'cat res2.txt', returnStdout: true)
+                    // response_body = sh(script: 'cat res.txt')
+                    println("in the test")
+                    // response_body = response_body.toString()
+                    // def jsonSlurper = new JsonSlurper()
+                    // data = jsonSlurper.parse(new File('res.txt'))
+                    // str = JsonOutput.toJson(response_body)
+                    // currentDir = new File(".").getAbsolutePath()
+                    println "here"
+                    // println ${currentDir}
+                    // data = readFile "/home/jenkins-user/workspace/testCI@55/res.txt"
+                    
+
+                    // println "${response_body}"
+                    println "${partial_failure}"
+                    
+                    // println ${str}
+                    if ("${response}" == "200") {
+                        println("in the 200 sucess")
+                        if (partial_failure.toInteger().equals(0)) {
+                            println("in the issue grep")
+                            println("Test has failed, please fix those and try again");
+                            sh 'exit 1'
+                        }
+                        // sh 'exit 1'
+                    } else { 
+                        //If the condition is false print the following statement 
+                        println("Test has failed, please fix those and try again");
+                        pritln ${response_body}
+                        sh 'exit 1'
+                     }
+                }
+            }
+            
+            post {                
+              success { 
+                  echo 'Job Success'
+          
+                  build job: 'EmailTrigger', parameters: [
+                    string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                    string(name: 'EMAIL_SUBJECT', value: "SUCCESS: Jenkins job: ${JOB_NAME} Integration test  (Build Number: ${BUILD_NUMBER})"),
+                    string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL}")
+                  ]
+              }
+              failure {
+              
+                    echo 'Job Failed :('
+                    // env.response_body = "test"
+                    build job: 'EmailTrigger', parameters: [
+                        string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                        string(name: 'EMAIL_SUBJECT', value: "Failed: Jenkins ${JOB_NAME} Integration test stage (Build Number: ${BUILD_NUMBER})"),
+                        string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL} \nFaiure cause: ${response_body}")
+                    ]
+              }
+            }            
+        }
+       
+       stage ('Deploy To clients Dev enviorment'){
+            input {
+                message "Do you want to proceed for dev environment?"
+            }
+            steps {
+                    sh 'echo "Deploy to dev"'
+                    sh '''
+                     image='''+IMAGE_TAG+'''
+                     ~/commands/deployKpiservericeDev '''+IMAGE_TAG+'''
+                    '''
+            }
+            
+            post {                
+              success { 
+                  echo 'Job Success'
+          
+                  build job: 'EmailTrigger', parameters: [
+                    string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                    string(name: 'EMAIL_SUBJECT', value: "SUCCESS: Jenkins job: ${JOB_NAME} Dev enviroment deployment  (Build Number: ${BUILD_NUMBER})"),
+                    string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL}")
+                  ]
+              }
+              failure {
+              
+                  echo 'Job Failed :('
+                  // env.response_body = "test"
+                  build job: 'EmailTrigger', parameters: [
+                    string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                    string(name: 'EMAIL_SUBJECT', value: "Failed: Jenkins ${JOB_NAME} Dev enviroment deployment (Build Number: ${BUILD_NUMBER})"),
+                    string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL} \nFaiure cause: ${response_body}")
+                  ]
+              }
+            }            
+        }
+    
+        stage ('Deploy To uat'){
+            input {
+                message "Do you want to proceed for uat environment?"
+            }
+            steps {
+                    // echo "${IMAGE_TAG}"
+                    sh  '''
+                    echo "Deploy into uat"
+                    echo '''+IMAGE_TAG+'''
+                    ~/commands/deployKpiservericeUat '''+IMAGE_TAG+'''
+                    '''
+                    //  ~/commands/deployKpiservericeUat '''+IMAGE_TAG+'''
+            }
+            post {                
+              success { 
+                  echo 'Job Success'
+          
+                  build job: 'EmailTrigger', parameters: [
+                    string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                    string(name: 'EMAIL_SUBJECT', value: "SUCCESS: Jenkins job: ${JOB_NAME} UAT enviroment deployment  (Build Number: ${BUILD_NUMBER})"),
+                    string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL}")
+                  ]
+              }
+              failure {
+              
+                  echo 'Job Failed :('
+                  // env.response_body = "test"
+                  build job: 'EmailTrigger', parameters: [
+                    string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+                    string(name: 'EMAIL_SUBJECT', value: "Failed: Jenkins ${JOB_NAME} UAT enviroment deployment (Build Number: ${BUILD_NUMBER})"),
+                    string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL} \nFaiure cause: ${response_body}")
+                  ]
+              }
+            }
+        }
+       stage ('Deploy To Prod'){
+            input {
+                message "Do you want to proceed for production environment?"
+            }
+            steps {
+                    sh 'echo "Deploy into Prod"'
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Job Completed'
+        }
+        
+        success {
+        
+            echo 'Job Success'
+        
+            build job: 'EmailTrigger', parameters: [
+              string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+              string(name: 'EMAIL_SUBJECT', value: "SUCCESS: Jenkins Build & Deploy (Build Number: ${BUILD_NUMBER})"),
+              string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL}")
+            ]
+        }
+        failure {
+        
+            echo 'Job Failed :('
+            // env.response_body = "test"
+            build job: 'EmailTrigger', parameters: [
+              string(name: 'TO_EMAILS', value: "deepak.singh@interface.ai"),
+              string(name: 'EMAIL_SUBJECT', value: "Failed: Jenkins ${JOB_NAME} Build & Deploy (Build Number: ${BUILD_NUMBER})"),
+              string(name: 'EMAIL_BODY', value: "Build Number: ${BUILD_NUMBER} \nBranch: ${branch} \nCheck Logs at ${BUILD_URL} \nFaiure cause: ${response_body}")
+            ]
+        }
+    }
+    
+}
