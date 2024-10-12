@@ -7,7 +7,7 @@ def longest_substr(str)
 
   for value in str.split('') do
     if test_str.include?(value)
-      test_str[test_str.index(value)+1, test_str.length - 1]
+      test_str = test_str[test_str.index(value)+1, test_str.length - 1]
     end
     p test_str
 
@@ -18,26 +18,28 @@ def longest_substr(str)
   return max_len
 end
 
-p longest_substr('geeksforgeeks')
+# p longest_substr('geeksforgeeks')
+# p longest_substr('abcabcbb')
+p longest_substr('pwwkew')
 
 
 
-def longest_subst(str)
-  substr = ''
-  max_len_substr = ''
+# def longest_subst(str)
+#   substr = ''
+#   max_len = -1
 
-  return 0 if substr.empty?
-  return 1 if substr.length == 1
+#   return 0 if str.empty?
+#   return 1 if str.length == 1
 
-  str.chars.each do |c|
-    if substr.include?(c)
-      substr[substr.indexOf(c) + 1, substr.length - 1]
-    end
+#   str.chars.each do |c|
+#     if substr.include?(c)
+#       substr[substr.indexOf(c) + 1, substr.length - 1]
+#     end
 
-    substr = substr + c
+#     substr = substr + c
 
-    max_len = [max_len, substr.length].max
-  end
+#     max_len = [max_len, substr.length].max
+#   end
 
-  return max_len
-end
+#   return max_len
+# end

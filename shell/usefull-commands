@@ -23,6 +23,11 @@ Check the space utilizaiton directory wise
    du -a --block-size=1G  | sort -n -r | head -n 5
 
 
+VIM commands:
+1. Find and replace
+  :%s/find/replace/g
+
+
 
 Take heap dump 
 1. With jcmd or jmap

@@ -1,4 +1,4 @@
-# Time Complexity: O(n). 
+# Time Complexity: O(nlogn) based on sort algo.
 # As the whole array is needed to be traversed only once.
 # Auxiliary Space: O(n). 
 # As a hash map has been used to store array elements.

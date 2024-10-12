@@ -1,0 +1,4 @@
+1. Regex to remove empty lines.
+- ^[ \t]*$\r?\n
+2. Remove all lines except goggle gpt record(RTB)
+- ^(?!google.).*\n
