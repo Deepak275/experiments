@@ -1,0 +1,62 @@
+atlp6s11_multi-tenant_pool_27
+atlp6s11_multi-tenant_pool_60
+
+13.111.172.128
+128.245.66.111
+128.245.66.112
+128.245.66.113
+
+
+
+Target: atlp6s11_multi-tenant_pool_56
+
+
+NO Include statement.
+
+SINGLE NIC
+
+
+Next NIC: 65
+
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_27" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_60" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+
+
+
+knife ssh "pmta_pool:<destination-pool-name>" "sudo ls /etc/pmta_ansible_managed | grep 'config.global_domain_settings.am'"
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_56" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+
+Upload Address_Map and <fqdn>_Config files
+
+ip a | grep eth0 | awk '{print $NF}'
+
+
+
+/root/set-up-new-ifcfgs.sh
+
+systemctl restart network.service
+
+nc -s  68.232.201.95 25
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_56" "sudo bash /root/set-up-new-ifcfgs.sh"
+
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_56" "sudo ls /etc/sysconfig/network-scripts/ | grep 'eth0:'"
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_56" "sudo systemctl restart network.service"
+
+bash /home/etapp/svn/scripts/makeCfgVfromIPpool.bash atlp6s11_multi-tenant_pool_56 poolIP IPs
+
+svn status ~/svn/mta/ | grep -v '?'
+
+svn ci -m "Updated config.vmtas files for IP migration CR 54416216"
+
+
+knife ssh "hotspare-machine-name" "sudo chef-client -o recipe'[itmta_vmta_update]'"
+
+SFMC-ITMTA@mc.salesforce.com
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_56" "sudo chef-client -o recipe'[itmta_vmta_update]'"

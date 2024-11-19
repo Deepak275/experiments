@@ -1,0 +1,39 @@
+$TTL 1H
+$ORIGIN mail.sundora.com.bd.
+
+localhost	IN A		127.0.0.1
+
+@		IN MX 10	reply.s13.exacttarget.com.
+@		IN A		96.43.154.16
+
+bounce		IN MX 10	bounce.s13.exacttarget.com.
+reply		IN MX 10	reply.s13.exacttarget.com.
+leave		IN MX 10	reply.s13.exacttarget.com.
+
+image		IN CNAME	tl314py5xr2pzpb7j9c91wh7lj41.image-sap.sfmc-content.com.
+view		IN CNAME	tl8f7nnxkj2vdlxl-flympz02551.view-sap.sfmc-marketing.com.
+click		IN CNAME	tl3-tck1hzjnl-s5zbp6xx9tgs7y.click-sap.sfmc-marketing.com.
+pages		IN CNAME	tl37zqk9b7fz-vrq3h6-bzkbgptm.cp-sap.sfmc-content.com.
+cloud  		IN CNAME  	tlwhgknccy92jmcdfjt1c-gmr86m.cp-sap.sfmc-content.com.
+
+mta		IN A		128.245.243.121
+
+
+; Sender Authentication
+
+13dkim1._domainkey  IN TXT ( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArmjNNnNdbZpMMtlw"
+"p6VS/T2U2y3Q3nImIgRk2uOVMC+FSCWwtBxFAL3rhG7bePCAp8Wxmb7tlY6q"
+"eRdVsVmQ/6WahKpJBuxvM2v/FVIHaGT1Ho2lzqfWyfJxACmr+OgJvoVch0bG"
+"fWdt2DnBZLDZA8CTahNakHcQFqike3ix5PbjbWkWgaSaxE+pWK2Kn4UkN4LT"
+"gHZi7C3HQTLq5BPRgh79MdE1B3CsAqCfy2L3AVO0sATCL4ci5mB/Sx2Cn4mK"
+"mn4VNA421mDbZxAwf694Qm3Bx7Qe6BGzD0nujDG7JWaoc/zndbX+cMO8cBF5"
+"giMdmrDJedvWgk9HCJXpDQkZYQIDAQAB" )
+
+@		IN TXT		"v=spf1 include:cust-spf.exacttarget.com -all"
+bounce		IN TXT		"v=spf1 include:cust-spf.exacttarget.com -all"
+reply		IN TXT		"v=spf1 include:cust-spf.exacttarget.com -all"
+
+_dmarc          IN TXT          "v=DMARC1; p=reject; adkim=r; aspf=r; pct=100;"
+
+
+

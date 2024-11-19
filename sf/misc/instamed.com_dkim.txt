@@ -1,0 +1,11 @@
+"$TTL 1H
+$ORIGIN instamed.com.
+
+
+7pd48._domainkey  IN TXT ( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqkHKzdnzD2bxDQ4u"
+"dMSuRvnlYM4vTxf/FgJvoz4b8uifczWRymEFATzqAYshBhcwlZbodhcBhvnf"
+"7nMT3LkKQloK9hTn8Gq14OItqLsS39xsjH3+iAmpWb1EvYrMFHeq9xRatxdQ"
+"7H5kC5DbowbVFPh9PyQrZTfS5RbuVQ3Yhd0OPucXGBjN+2c/YJAtF/VAw6Mx"
+"Ba+Vb/8JyxcIw984paBvUJ04XSwqOzMyHe2MyNADLQKE3msttxGqk/hhBXUw"
+"SqWw+YKKmHWT6wBkEvW4Fjf6EAIVP41i2e0D3cdHFnhOOIKV6LfXc9KYATUs"
+"6mzVQIWrE0n6eQJed5P7B5t2BwIDAQAB" )"

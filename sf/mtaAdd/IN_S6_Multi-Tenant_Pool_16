@@ -1,0 +1,42 @@
+IN_S6_Multi-Tenant_Pool_16
+
+ind1s06mta2249.xt.local
+ind1s06mta2250.xt.local
+ind1s06mta2251.xt.local
+
+ind1s06mta2249
+ind1s06mta2251
+ind1s06mta2250
+
+
+ind1s06mta2249.xt.local,ind1s06mta2250.xt.local
+
+
+svn ci -m 'adding new MTAs to IN_S6_Multi-Tenant_Pool_16 - CR 56792470'
+
+svn add <list of new config.vmtas> ; svn ci -m 'adding vmtas file for new MTAs in pool IN_S6_Multi-Tenant_Pool_16'
+
+mkdir ~/provisioning/IN_S6_Multi-Tenant_Pool_16_capadd
+
+bash get-tar-files--ADD.bash
+
+ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+136.147.143.35
+66.231.93.31
+13.111.83.113
+
+m.cornell.edu
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+knife node run_list set ind1s06mta2249.xt.local recipe[itmta_outbound_base]
+knife node run_list set ind1s06mta2250.xt.local recipe[itmta_outbound_base]
+knife node run_list set ind1s06mta2251.xt.local recipe[itmta_outbound_base]
+
+
+knife ssh -m "$(<new_mtas)" "sudo monit summary" 
+knife ssh -m "$(<new_mtas)" "sudo cinc-client -o recipe[itmta_classic_deploy::nas_mounts]" 
+knife ssh "pmta_pool:IN_S6_Multi-Tenant_Pool_16" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"

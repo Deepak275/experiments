@@ -1,0 +1,40 @@
+Indy_DC_MTA_Pool_113
+
+
+ind1s01mta1518.xt.local
+ind1s01mta1519.xt.local
+ind1s01mta1520.xt.local
+ind1s01mta1521.xt.local
+
+
+
+ind1s01mta1518.xt.local,ind1s01mta1519.xt.local,ind1s01mta1520.xt.local,ind1s01mta1521.xt.local
+
+
+knife ssh "pmta_pool:Indy_DC_MTA_Pool_113" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+
+svn ci -m 'adding new MTAs to Indy_DC_MTA_Pool_113'
+
+~/svn/scripts/clone-mta-config.sh   ind1s01mta1518
+
+
+svn add <list of new config.vmtas> ; svn ci -m 'adding vmtas file for new MTAs in pool'
+
+mkdir ~/provisioning/W-16786364_capadd
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+
+knife node run_list set ind1s01mta1518.xt.local recipe[itmta_outbound_base]
+knife node run_list set ind1s01mta1519.xt.local recipe[itmta_outbound_base]
+knife node run_list set ind1s01mta1520.xt.local recipe[itmta_outbound_base]
+knife node run_list set ind1s01mta1521.xt.local recipe[itmta_outbound_base]
+
+cinc-client -o recipe[itmta_classic_deploy::named]
+
+cinc-client -o recipe[itmta_classic_deploy::nas_mounts]
+
+
+gdf_deploy.sh Indy_DC_MTA_Pool_113
+
+SFMC-ITMTA@mc.salesforce.com

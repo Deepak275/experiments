@@ -1,0 +1,55 @@
+13.111.56.91
+13.111.56.129-160
+136.147.141.203
+136.147.143.16-27
+136.147.181.223
+
+13.111.56.91 Indy_DC_MTA_Pool_31
+13.111.56.129-160 Indy_DC_MTA_Pool_32
+136.147.141.203 Indy_DC_MTA_Pool_58
+136.147.143.16-27 xtinp1s1_Pool_106
+136.147.181.223 xtinp1s1_Pool_102
+
+
+Target :  ind1s01_kirin_holdings
+
+No Include statements
+
+knife ssh "pmta_pool:<current-pool-name>" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+knife ssh "pmta_pool:Indy_DC_MTA_Pool_31" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+knife ssh "pmta_pool:Indy_DC_MTA_Pool_32" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+knife ssh "pmta_pool:xtinp1s1_Pool_106" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+knife ssh "pmta_pool:Indy_DC_MTA_Pool_58" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+knife ssh "pmta_pool:xtinp1s1_Pool_102" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+
+
+
+knife ssh "pmta_pool:ind1s01_kirin_holdings" "sudo ls /etc/pmta_ansible_managed | grep 'config.global_domain_settings.am'"
+
+knife ssh "pmta_pool:ind1s01_kirin_holdings" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+
+
+NOte:
+default-virtual-mta, Need to do extra step for cleanup
+  
+13.111.56.129
+
+
+DUAL NIC
+
+
+Next Interface: 31
+
+
+SFMC-ITMTA@mc.salesforce.com
+
+
+
+
+knife ssh "pmta_pool:ind1s01_kirin_holdings" "sudo bash /root/set-up-new-ifcfgs-ens224.sh"
+
+knife ssh "pmta_pool:ind1s01_kirin_holdings" "sudo ls /etc/sysconfig/network-scripts/ | grep 'ens224:'"
+knife ssh "pmta_pool:ind1s01_kirin_holdings" "sudo systemctl restart network.service"
+
+knife ssh "pmta_pool:ind1s01_kirin_holdings" "sudo chef-client -o recipe'[itmta_vmta_update]'"

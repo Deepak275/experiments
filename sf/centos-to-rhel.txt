@@ -1,0 +1,15 @@
+index=linux (sourcetype=CPU CPU=all) (host=atl1q14bmmmx02.qa.local OR host=`remove_domain(atl1q14bmmmx02.qa.local)`)
+| eval pctIdle = pctIdle / 100
+| timechart max(cpu_load_percent) as CPUusage span=5min by host
+
+index=itmta sourcetype=mta:* host=atl1q14bmmmx02.qa.local
+| timechart span=1d count
+
+
+index=linux (host=atl1q14bmmmx02.qa.local OR host=`remove_domain(atl1q14bmmmx02.qa.local)`) sourcetype-ps
+| timechart max(pctMEM) by COMMAND
+
+
+
+Deliveribilty dasboard. To find the status of email for an MID and domain
+https://splunk-s50.xt.local/en-US/app/SFMC_Monitoring/itmtadeliverabilitytroubleshoot?form.host_prefix=fra3s50&form.type=d&form.type=r&form.type=b&form.type=t&form.MID=510000149&form.jobID=*&form.IP=*&form.email=neil.mackay99&form.domain=gmail.com&form.field1.earliest=1720584000&form.field1.latest=now

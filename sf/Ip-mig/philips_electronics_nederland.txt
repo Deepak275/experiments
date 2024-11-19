@@ -1,0 +1,26 @@
+161.71.36.93
+
+161.71.36.93 fra3s50_multi-tenant_pool_6
+
+
+Destination Pool: fra3s50_philips_electronics_nederland
+
+
+Dual NIC
+
+Next interface: 71
+
+knife ssh "pmta_pool:fra3s50_philips_electronics_nederland" "sudo ls /etc/pmta_ansible_managed | grep 'config.global_domain_settings.am'"
+knife ssh "pmta_pool:fra3s50_philips_electronics_nederland" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+
+
+knife ssh "pmta_pool:fra3s50_philips_electronics_nederland" "sudo bash /root/set-up-new-ifcfgs-ens224.sh"
+
+knife ssh "pmta_pool:fra3s50_philips_electronics_nederland" "sudo ls /etc/sysconfig/network-scripts/ | grep 'ens224:'"
+
+
+knife ssh "hotspare-machine-name" "sudo chef-client -o recipe'[itmta_vmta_update]'"
+
+knife ssh "pmta_pool:fra3s50_philips_electronics_nederland" "sudo chef-client -o recipe'[itmta_vmta_update]'"
+

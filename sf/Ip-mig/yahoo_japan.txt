@@ -1,0 +1,59 @@
+13.111.78.88 (atlp6s11_multi-tenant_pool_13)
+13.111.78.126 (atlp6s11_multi-tenant_pool_13)
+13.111.78.127 (atlp6s11_multi-tenant_pool_13)
+13.111.78.128 (atlp6s11_multi-tenant_pool_13)
+128.245.66.7 (atlp6s11_multi-tenant_pool_61)
+128.245.66.56 (atlp6s11_multi-tenant_pool_60)
+
+
+
+Destination Pool for IPs:
+atlp6s11_yahoo_japan_pool
+
+
+
+Single NIC
+
+Last NIC: 90
+
+knife ssh "pmta_pool:atlp6s11_yahoo_japan_pool" "sudo ls /etc/pmta_ansible_managed | grep 'config.global_domain_settings.am'"
+knife ssh "pmta_pool:atlp6s11_yahoo_japan_pool" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+
+
+
+knife ssh "pmta_pool:atlp6s11_yahoo_japan_pool" "sudo bash /root/set-up-new-ifcfgs.sh"
+knife ssh "pmta_pool:atlp6s11_yahoo_japan_pool" "sudo ls /etc/sysconfig/network-scripts/ | grep 'eth0:'"
+
+knife ssh "pmta_pool:atlp6s11_yahoo_japan_pool" "sudo systemctl restart network.service"
+
+
+knife ssh "pmta_pool:atlp6s11_yahoo_japan_pool" "sudo chef-client -o recipe'[itmta_vmta_update]'"
+
+
+index=itmta sourcetype=mta:receive vmta IN (13.111.78.88, 13.111.78.126, 13.111.78.127, 13.111.78.128, 128.245.66.56, 128.245.66.7)
+| stats count by host
+
+svn ci -m "Updated Address Map for post migration cleanup CR 53656849"
+
+
+atl1s11inmx02.xt.local
+
+ind1s01mtamgt01.xt.local
+
+
+ind1s01bmmmx18.xt.local
+ind1s01bmmmx19.xt.local
+ind1s01bmmmx20.xt.local
+ind1s01bmmmx21.xt.local
+ind1s01bmmmx22.xt.local
+ind1s01bmmmx23.xt.local
+ind1s01bmmmx24.xt.local
+ind1s01bmmmx25.xt.local
+ind1s01bmmmx26.xt.local
+ind1s01bmmmx27.xt.local
+ind1s01bmmmx28.xt.local
+ind1s01bmmmx29.xt.local
+ind1s01bmmmx30.xt.local
+
+index=postfix host=ind1s01inmx03.xt.local

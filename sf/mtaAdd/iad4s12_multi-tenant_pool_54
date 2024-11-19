@@ -1,0 +1,45 @@
+Current # of MTAs: 7
+# of MTAs being added: 2
+iad4s12mta32.xt.local
+iad4s12mta895.xt.local
+
+iad4s12_multi-tenant_pool_54
+
+iad4s12mta1042.xt.local
+iad4s12mta896.xt.local
+
+
+
+iad4s12mta1042
+iad4s12mta896
+
+cinc-client -o recipe[itmta_provision::doubleDkim_prod]
+knife ssh "pmta_pool:iad4s12_multi-tenant_pool_54" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+svn ci -m 'adding new MTAs to iad4s12_multi-tenant_pool_54'
+~/svn/scripts/clone-mta-config.sh
+W-16786649
+
+
+~/svn/scripts/clone-mta-config.sh
+mkdir ~/provisioning/<pool_name>_capadd
+
+knife node run_list set iad4s12mta1042.xt.local recipe[itmta_outbound_base]
+knife node run_list set iad4s12mta896.xt.local recipe[itmta_outbound_base]
+
+knife ssh -m "$(<servers)" "sudo monit reload"
+knife ssh -m "$(<servers)" "sudo monit summary"
+
+
+knife ssh "pmta_pool:<current-pool-name>" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq" 
+
+mv ~/svn/mta/merged/config.vmtas.iad4s12mta896.xt.local ~/svn/mta/
+svn ci -m 'adding vmtas file for new MTAs in pool'
+
+
+email.expressoil.com 
+
+/home/etapp/provisioning/modules/remote-provision.bash
+
+dfwp5s10_multi-tenant_pool_49
+
+nc -v -s  68.232.201.95 25

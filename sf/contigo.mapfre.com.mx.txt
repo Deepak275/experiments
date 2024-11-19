@@ -1,0 +1,25 @@
+$TTL 1H
+$ORIGIN contigo.mapfre.com.mx.
+
+
+localhost	IN A		127.0.0.1
+
+bounce          IN MX 10        inbound.s7.exacttarget.com.
+reply           IN MX 10        inbound-reply.s7.exacttarget.com.
+leave           IN MX 10        inbound-reply.s7.exacttarget.com.
+
+@		IN MX 10	inbound-reply.s7.exacttarget.com.
+@		IN A		136.147.129.27
+
+; Sender Authentication
+
+200608._domainkey       IN TXT          "k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDGoQCNwAQdJBy23MrShs1EuHqK/dtDC33QrTqgWd9CJmtM3CK2ZiTYugkhcxnkEtGbzg+IJqcDRNkZHyoRezTf6QbinBB2dbyANEuwKI5DVRBFowQOj9zvM3IvxAEboMlb0szUjAoML94HOkKuGuCkdZ1gbVEi3GcVwrIQphal1QIDAQAB"
+
+@		IN TXT		"v=spf1 include:cust-spf.exacttarget.com -all"
+@		IN TXT		"spf2.0/pra include:cust-senderid.exacttarget.com -all"
+
+reply           IN TXT          "v=spf1 include:cust-spf.exacttarget.com -all"
+reply           IN TXT          "spf2.0/pra include:cust-senderid.exacttarget.com -all"
+
+bounce          IN TXT          "v=spf1 include:cust-spf.exacttarget.com -all"
+bounce          IN TXT          "spf2.0/pra include:cust-senderid.exacttarget.com -all"

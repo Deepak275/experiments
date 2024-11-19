@@ -1,0 +1,7 @@
+{
+  "destinationPool": "iad4s13_banco_do_brasil_sa",
+  "ipsBeingMigrated": {
+    "128.245.243.155": "iad4s13_good_rx_cdp"
+  },
+  "testmail": "dsingh4@salesforce.com"
+}

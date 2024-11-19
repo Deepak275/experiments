@@ -1,0 +1,284 @@
+"_dmarc IN TXT ""v=DMARC1; p=reject; pct=100;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; pct=100;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; adkim=r; aspf=r; pct=100;"""
+"_dmarc IN TXT ""v=DMARC1; p=quarantine; adkim=r; aspf=r; pct=100;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; rua=mailto:tnoff9hr@ag.eu.dmarcadvisor.com; adkim=s;"""
+"_dmarc IN TXT ""v=DMARC1; p=quarantine; pct=0; fo=1; ri=3600; rua=mailto:Rua-allianz@allianz.com; ruf=mailto:Ruf-allianz@allianz.com;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; rua=mailto:40a7a2c00ac7950@rep.dmarcanalyzer.com; ruf=mailto:40a7a2c00ac7950@for.dmarcanalyzer.com; adkim=r; aspf=r; fo=1;"""
+"_dmarc IN TXT ""v=DMARC1; p=quarantine; sp=reject; rua=mailto:dmarc_agg@dmarc.everest.email; ruf=mailto:dmarc_fr@dmarc.everest.email; adkim=r; aspf=r; ri=43200; fo=1; pct=100;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; rua=mailto:bac312054d5d48d7a98650ca13a0369a@dmarc-reports.cloudflare.net,mailto:tnoff9hr@ag.eu.dmarcadvisor.com; adkim=s;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; rua=mailto:dmarc_agg@dmarc.everest.email,mailto:demarc@hickoryfarms.com; ruf=mailto:dmarc_fr@dmarc.everest.email,mailto:demarc@hickoryfarms.com; fo=1; pct=100; rf=afrf;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; rua=mailto:6328e5c05d17202@rep.dmarcanalyzer.com,mailto:H9xrC9JdEv@dmarc.inboxmonster.com; ruf=mailto:6328e5c05d17202@for.dmarcanalyzer.com; fo=1;"""
+
+_dmarc IN TXT "v=DMARC1; p=quarantine; adkim=r; aspf=r; pct=100;rua=mailto:ttinetworksanz@ttibrands.com.au;ruf=mailto:ttinetworksanz@ttibrands.com.au;"
+
+_dmarc IN TXT "v=DMARC1; p=reject; pct=100; rua=tag;"
+
+
+@ IN TXT "google-site-verification=9jKQGdC6ZzWRB77jodsY2LzCBlzyJ46EEazZtsOlLo8"
+
+"@ IN TXT ""google-site-verification=hSIWIGb0O_ge_NaDj3rPndRP0OF6eua5d1gDiOOMRtw"""
+"@ IN TXT ""google-site-verification=9JBx6CJ_bAIqFyxWX4lz9WFKoovqbVJh7ADA7wcXa_s"""
+"@ IN TXT ""google-site-verification=XWiN5zeW_-BqmngyoIWKV3jKY3w1dGYPK816WsKM1eQ"""
+
+
+"@ IN TXT ""google-site-verification=xdST6r1HyWHBq5mKvuewSEVjw6ZVvXQMujaUhkvMuFc"""
+"@ IN TXT ""google-site-verification=OMvnNtoOwajwtwnpRlYJj4JwLc5BduWBKHee8VxPAqY"""
+
+
+
+
+v=DMARC1; p=reject; pct=100; rua=mailto:informes.generales@uoc.edu
+v=DMARC1; p=none; pct=100; rua=mailto:informes.generales@uoc.edu
+
+email.uoc.edu
+email2.uoc.edu
+"_dmarc IN TXT ""v=DMARC1; p=none; pct=100; rua=mailto:informes.generales@uoc.edu;"""
+"_dmarc IN TXT ""v=DMARC1; p=reject; pct=100; rua=mailto:informes.generales@uoc.edu;"""
+
+rua=mailto:informes.generales@uoc.edu
+
+comunicacionestalo.cl
+meyers.funeralpreplan.info
+email.refugeerights.org
+
+
+@ IN CAA 0 issue "digicert.com"
+
+default._bimi IN TXT "v=BIMI1;l=https://www.flagstar.com/content/dam/flagstar/svgs/flagstar-brandmark-RGB-100x100_1105427_MC_BIMI.svg;"
+"default._bimi IN TXT ""v=BIMI1;l=https://www.dfsk.com.pe/icono.svg; a=;"""
+"default._bimi IN TXT ""v=BIMI1; l=https://bimi-host.250ok.com/1017594_email_ondemand_europcar_com.svg"""
+"default._bimi IN TXT "";"""
+"default._bimi IN TXT ""v=BIMI1;l=https://www.ashikagabank.co.jp/logo/abk_logo.svg;a=https://www.ashikagabank.co.jp/logo/abk_logo.pem;"""
+"default._bimi IN TXT ""v=DMARC1; p=reject; pct=100; fo=1; rua=mailto:b03f6340@mxtoolbox.dmarc-report.com; ruf=mailto:b03f6340@forensics.dmarc-report.com;"""
+"default._bimi IN TXT ""v=BIMI1;l=https://vmc.digicert.com/bcee61a9-7ed6-4cb2-8396-c39e073b0e7f.svg;a=https://vmc.digicert.com/bcee61a9-7ed6-4cb2-8396-c39e073b0e7f.pem;"""
+"default._bimi IN TXT ""v=BIMI1;l=https://vmc.digicert.com/c972c9f9-c05e-4f31-9bad-41b8a2abb2ce.svg; a=https://vmc.digicert.com/c972c9f9-c05e-4f31-9bad-41b8a2abb2ce.pem;"""
+"default._bimi IN TXT ""v=BIMI1; l=https://p3.aprimocdn.net/swisscom/3944a1a9-b7fa-43be-b8b3-b20300bfab8e/bimi_Icon_Variante2_Original%20file.svg;"""
+"default._bimi IN TXT ""v=BIMI1; l=https://p3.aprimocdn.net/swisscom/3944a1a9-b7fa-43be-b8b3-b20300bfab8e/bimi_Icon_Variante2_Original%20file.svg;"""
+
+em.omnihotels.com
+
+
+v=BIMI1;l=https://vmc.digicert.com/c972c9f9-c05e-4f31-9bad-41b8a2abb2ce.svg; a=https://vmc.digicert.com/c972c9f9-c05e-4f31-9bad-41b8a2abb2ce.pem;
+
+comunicacionestalo.cl
+meyers.funeralpreplan.info
+email.refugeerights.org
+
+default._bimi IN TXT "v=BIMI1;l=https://vmc.digicert.com/bcee61a9-7ed6-4cb2-8396-c39e073b0e7f.svg;a=https://vmc.digicert.com/bcee61a9-7ed6-4cb2-8396-c39e073b0e7f.pem;"
+
+info.iu.org
+_dmarc IN TXT "v=DMARC1; p=reject; rua=mailto:tnoff9hr@ag.eu.dmarcadvisor.com; aspf=s;"
+
+cloud IN CNAME pub.s51.exacttarget.com.
+cloud IN CNAME pub.s51.exacttarget.com.
+email.co-op.crs
+
+cloud2 IN CNAME tlswqg3dskc20bk9p7nl8ddwvklq.cp-sap.sfmc-content.com.
+outreach.redcross.org
+
+orchestranews.shop-orchestra.com
+rua=mailto:adarnault@orchestra-premaman.com
+
+generosidad IN CNAME   tlt7p9wsxlbb70clzwsf2kv7hk9q.cp-sap.sfmc-content.com.
+polska IN CNAME   tl3kmghswqnkk06779t893mzn18m.cp-sap.sfmc-content.com.
+yjsssy45cnx3 IN CNAME   gv-v36mtpuhdbc5a3.dv.googlehosted.com.
+polska IN CNAME   tl3kmghswqnkk06779t893mzn18m.cp-sap.sfmc-content.com.
+
+@ IN TXT "apple-domain-verification=nw2rbfkjM7jaDdtq9cZkalGfmFFUbeU4gJX6njyEaUs"
+_dnsauth IN TXT "_1tzuwx4d10o26vm0b6sjj1ye9tqgpj9"
+
+
+@ IN TXT "verification=MtX51AXGfezRyF9_zHPDS7WhsqT3-7h3zoEkRY3jLW8"
+@ IN TXT "_zoxezzor4nf7f5q65h8o0xqqd0wfkon"
+
+
+
+@ IN TXT "SFMC-Pv69DS0Y1swCn-wQaV0l6Cbj9TxKOVFR-FlhNHSr"
+
+@ IN TXT "apple-domain-verification=10V9mslsoAM7bX7Z79GV7VXgYFRtuuElKC2Jycuo_-4"
+
+_proofpoint-verification  I  TXT  cab8a4ee-7bd6-45d8-bc31-a5023bfdf720
+
+_pki-validation  IN TXT  473C-628E-2D14-20DC-A1AF-965C-0344-D641
+_pki-validation  IN TXT  8vWjHfqsxDmQhptZZ3zNA9BDotI:8F59-C58D-9DA8-1EC2-1E0A-70F3-209B-2A9B
+
+W-16851836	confidentgroup.info
+
+@  IN TXT  "v=spf1 include:cust-spf.exacttarget.com include:mail.zendesk.com include:spf-00347101.pphosted.com -all"
+@  IN TXT  "v=spf1 ip4:13.111.123.43/32 include:cust-spf.exacttarget.com -all"
+
+
+@ IN TXT "yahoo-verification-key=b69QKvfzur1yMLj85AEy509NzEw+wwR0KRyWbO02WHY="
+
+@ IN TXT "validity-domain-monitoring=GQVzlJ4C1X3DzImes6H2oaLEe"
+@ IN TXT "Validity-Domain-Verification=bu6bhA+zV3IpiPD0wee4dOqofyM="
+@ IN TXT "Validity-Domain-Verification=bu6bhA+zV3IpiPD0wee4dOqofyM="
+
+Stack 10: 10dkim1._domainkey IN CNAME 10dkim1._domainkey.s10.exacttarget.com.
+Stack 11: 11dkim1._domainkey IN CNAME 11dkim1._domainkey.s11.exacttarget.com.
+Stack 12: 12dkim1._domainkey IN CNAME 12dkim1._domainkey.s12.exacttarget.com.
+Stack 50: 50dkim1._domainkey IN CNAME 50dkim1._domainkey.s50.exacttarget.com.
+Stack 51: 51dkim1._domainkey IN CNAME 51dkim1._domainkey.s51.exacttarget.com.
+Stack 13: 13dkim1._domainkey IN CNAME 13dkim1._domainkey.s13.exacttarget.com.
+
+
+domain-key 11pd48,info.eg.se,"/etc/pmta/<pool name>/11pd48.pardotdkim.com.key"
+domain-key 11pd48,info.eg.no,"/etc/pmta/<pool name>/11pd48.pardotdkim.com.key"
+
+
+
+domain-key 11pd48,backmarket.com,"/etc/pmta/<pool name>/11pd48.pardotdkim.com.key"
+
+13.111.73.233
+
+default._bimi IN TXT "v=BIMI1;l=https://www.ashikagabank.co.jp/logo/abk_logo.svg;a=https://www.ashikagabank.co.jp/logo/abk_logo.pem;"
+
+
+
+domain-key 6pd48,<domain>,"/etc/pmta/<pool name>/6pd48.pardotdkim.com.key"
+domain-key 7pd48,<domain>,"/etc/pmta/<pool name>/7pd48.pardotdkim.com.key"
+domain-key 11pd48,<domain>,"/etc/pmta/<pool name>/11pd48.pardotdkim.com.key"
+domain-key 10pd48,<domain>,"/etc/pmta/<pool name>/10pd48.pardotdkim.com.key"
+domain-key 13pd48,<domain>,"/etc/pmta/<pool name>/13pd48.pardotdkim.com.key"
+
+
+domain-key 11pd48,info.entreprises-collectivites.engie.fr,"/etc/pmta//11pd48.pardotdkim.com.key"
+
+
+
+
+domain-key 10pd48,primesourcebp.com,"/etc/pmta/<pool name>/10pd48.pardotdkim.com.key"
+domain-key 10pd48,grip-rite.com,"/etc/pmta/<pool name>/10pd48.pardotdkim.com.key"
+13.111.127.253
+
+domain-key 11pd48,phoenixcontact.com,"/etc/pmta//11pd48.pardotdkim.com.key"
+domain-key 11pd48,phoenixcontact.dk,"/etc/pmta//11pd48.pardotdkim.com.key"
+domain-key 11pd48,phoenixcontact.com,"/etc/pmta//11pd48.pardotdkim.com.key"
+domain-key 11pd48,phoenixcontact.pl,"/etc/pmta//11pd48.pardotdkim.com.key"
+domain-key 11pd48,phoenixcontact.co.uk,"/etc/pmta//11pd48.pardotdkim.com.key"
+domain-key 11pd48,phoenixcontact.nl,"/etc/pmta//11pd48.pardotdkim.com.key"
+
+13.111.74.19
+
+
+@ IN TXT "yahoo-verification-key=gvWrDpZpbXvZwCNSx87fiGHNHMC70N5I4zUcmlSskTI="
+@ IN TXT "validity-domain-monitoring=GQVzlJ4C1X3DzImes6H2oaLEe"
+
+128.245.255.206
+mkt.solodeportes.com.ar
+
+_9r2rtzmyg0z3v1j4q0274oh2lzzt9n5   IN  CNAME  dcv.digicert.com.
+
+atlp6s11_multi-tenant_pool_28
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_28" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+email.americanblinds.com
+email.blinds.com
+email.justblinds.com
+dasa-mail.com
+
+email.jp-life.japanpost.jp
+
+
+W-16919868
+W-16960780
+
+
+
+email.loopnet.co.uk
+email.loopnet.fr
+email.loopnet.es
+
+
+foodandwineclub.com
+delivery.ayudaencarretera.com
+peopleenespanolclub.com
+delivery.tlfamilyclub.com
+
+iad4s12_professional_datasolutions
+atlp6s11_multi-tenant_pool_62
+
+
+atl1s11mta1000.xt.local
+atl1s11mta1001.xt.local
+
+/usr/sbin/named-checkconf -z -t /var/named/chroot /etc/namedb/named.conf
+
+knife ssh atl1s11mta1000.xt.local "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+cinc-client -o recipe[itmta_classic_deploy::nas_mounts]
+
+dfw1s10mta320.xt.local
+dfw1s10mta320.xt.local
+
+dfwp5s10_Citi_Singapore_Pool_2
+
+email.aaawa.com
+
+email.claasfinancial.com
+
+
+atl1s11mta1253.xt.local
+atl1s11mta1254.xt.local
+
+
+
+atl1s08mta43.xt.local
+atl1s08mta44.xt.local
+atl1s08mta45.xt.local
+
+
+mutt -a "File_Attachment.csv" -s "Daily Report for" dsingh4@salesforce.com -y
+
+13.111.170.40
+13.111.170.39
+
+max-smtp-out
+
+
+<domain [*.]rr.com>
+  max-smtp-out 1
+</domain>
+
+<domain comcast.net>
+  max-smtp-out 1
+</domain>
+
+<domain [*.]rr.com>
+  max-smtp-out 10
+</domain>
+
+<domain comcast.net>
+  max-smtp-out 10
+</domain>
+
+knife ssh "pmta_pool:<pool name>" "sudo pmta show settings comcast.net/13.111.170.40 | grep 'max-smtp-out'"
+knife ssh "pmta_pool:<pool name>" "sudo pmta show settings rr.com/13.111.170.40 | grep 'max-smtp-out'"
+
+13.111.170.39
+13.111.170.40
+
+
+@ IN TXT "Validity-Domain-Verification=bu6bhA+zV3IpiPD0wee4dOqofyM="
+
+
+
+
+
+
+CNAME
+
+bduc3ifmc6k3  IN CNAME gv-vhemhommx5xfhj.dv.googlehosted.com.
+
+
+
+TXT
+
+news.devlyn.com.mx
+
+VALUE
+
+@    IN TXT   google-site-verification=i70Nfk9Er
+
+knife exec rhel7OutboundAudit.rb xtins1.rb

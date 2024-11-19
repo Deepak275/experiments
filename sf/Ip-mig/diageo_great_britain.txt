@@ -1,0 +1,31 @@
+161.71.72.101
+161.71.71.190
+
+
+knife ssh "pmta_pool:<pool-name>" "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+Dual NIC
+
+
+161.71.71.190 fra3s50_multi-tenant_pool_37
+161.71.72.101 fra3s50_multi-tenant_pool_39
+
+
+fra3s50_diageo_great_britain
+
+Stack50.OutboundMTA
+
+
+NEXT INTERFACE NO: 65
+
+
+knife ssh "pmta_pool:fra3s50_diageo_great_britain" "sudo ls /etc/sysconfig/network-scripts/ | grep 'ens224:'"
+
+knife ssh "pmta_pool:fra3s50_diageo_great_britain" "sudo systemctl restart network.service"
+
+
+
+
+knife ssh "hotspare-machine-name" "sudo chef-client -o recipe'[itmta_vmta_update]'"
+
+knife ssh "pmta_pool:fra3s50_diageo_great_britain" "sudo chef-client -o recipe'[itmta_vmta_update]'"

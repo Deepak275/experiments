@@ -1,0 +1,29 @@
+iad4s12_multi-tenant_pool_39
+
+Stack: 12
+Current number of MTAs: 7
+Number of MTAs being added: 2
+
+
+
+iad4s12mta1042.xt.local
+iad4s12mta1153.xt.local
+iad4s12mta1155.xt.local
+
+
+
+
+adding new MTAs to iad4s12_multi-tenant_pool_39 - CR 56876946
+
+adding vmtas file for new MTAs in pool
+
+iad4s12mta1042
+iad4s12mta1153
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+~/svn/scripts/clone-mta-config.sh
+
+cp ~/provisioning/modules/adjust.bash . ; bash adjust.bash
+
+knife ssh "pmta_pool:iad4s12_multi-tenant_pool_39" "sudo monit summary"

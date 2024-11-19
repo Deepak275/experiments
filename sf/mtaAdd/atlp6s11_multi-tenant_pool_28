@@ -1,0 +1,111 @@
+atl1s11mta1000.xt.local
+atl1s11mta1001.xt.local
+
+
+
+
+atl1s11mta1166.xt.local
+atl1s11mta1167.xt.local
+
+
+atl1s11mta1166
+atl1s11mta1167
+
+
+
+
+
+
+
+atl1s11mta1253.xt.local
+atl1s11mta1254.xt.local
+
+
+atlp6s11_multi-tenant_pool_28
+
+atl1s11mta1253.xt.local,atl1s11mta1254.xt.local
+
+atl1s11mta1253
+atl1s11mta1254
+
+knife node run_list set atl1s11mta1166.xt.local recipe[itmta_outbound_base]
+knife node run_list set atl1s11mta1167.xt.local recipe[itmta_outbound_base]
+
+bash get-tar-files--ADD.bash
+
+/home/etapp/provisioning/modules/remote-provision.bash
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+knife ssh atl1s11mta1253.xt.local "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+knife ssh atl1s11mta1254.xt.local "sudo ls -l /etc/sysconfig/network-scripts | grep ifcfg-"
+
+knife ssh "pmta_pool:atlp6s11_multi-tenant_pool_28" "sudo grep 'default-virtual-mta' /etc/pmta/dynamic_configs/config.sources | sort | uniq"
+
+svn ci -m 'adding new MTAs to atlp6s11_multi-tenant_pool_28'
+
+~/svn/scripts/clone-mta-config.sh
+
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+knife node run_list set atl1s11mta1253.xt.local recipe[itmta_outbound_base]
+knife node run_list set atl1s11mta1254.xt.local recipe[itmta_outbound_base]
+
+
+
+mkdir ~/provisioning/pool28_capadd
+
+knife ssh -m "$(<new_mtas)" "sudo cinc-client"
+
+cinc-client -o recipe[itmta_outbound]
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+
+
+
+209
+225
+241
+1
+17
+
+
+210
+226
+242
+2
+18
+
+211
+227
+243
+3
+19
+
+
+
+216
+232
+248
+8
+24
+
+217
+233
+249
+9
+25
+
+
+
+index=itmta sourcetype=mta:receive vmta IN (13.111..129, IP2, IP3...)
+| eval host = if(LIKE(host, "%.xt.local"), host, host.".xt.local") 
+| lookup MtaOmmInventory.csv mtaHost as host OUTPUT pool
+| stats count by vmta pool
+| sort 0 vmta
+
+
+
+
+gdf_deploy.sh atlp6s11_multi-tenant_pool_28

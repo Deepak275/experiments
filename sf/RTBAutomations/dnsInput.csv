@@ -1,0 +1,2 @@
+GUS Ticket,Domain,Type,Change
+W-13166408,hublot-communications.com,dmarc,"_dmarc IN TXT ""v=DMARC1; p=reject; fo=1; rua=mailto:dmarc_rua@emaildefense.proofpoint.com; ruf=mailto:dmarc_ruf@emaildefense.proofpoint.com"""

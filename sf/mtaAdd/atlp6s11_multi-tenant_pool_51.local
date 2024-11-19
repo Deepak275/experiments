@@ -1,0 +1,39 @@
+MTA Add
+atlp6s11_multi-tenant_pool_51
+
+
+
+atl1s11mta1111.xt.local
+atl1s11mta1112.xt.local
+
+knife ssh -m "$(<new_mtas)" "sudo chef-client"
+
+13.111.139.129
+
+
+
+BU = Business Unit
+Ellie Baum8:02 PM
+| inputlookup members.csv WHERE member=<MID>
+Ellie Baum8:05 PM
+MID / EID is associated with an IP
+An IP is associated with a group of MTAs
+Ellie Baum8:15 PM
+(NOLOCK)
+Ellie Baum8:17 PM
+SELECT TOP 10 *
+Ellie Baum8:21 PM
+https://lucid.app/lucidchart/9b802f6a-f263-4a49-8d04-5012d5cf613e/edit?invitationId=inv_25fc31f2-25b2-4340-a847-55ab8be8c4dc&page=0_0#
+Ellie Baum8:23 PM
+S7-Systemdb
+Systemdb
+
+
+
+svn ci -m "adding vmtas file for new MTAs in pool for CR 56529446"
+
+bash /home/etapp/provisioning/modules/remote-provision.bash
+
+sudo knife node run_list set atl1s11mta1111.xt.local recipe[itmta_outbound_base]
+sudo knife node run_list set atl1s11mta1112.xt.local recipe[itmta_outbound_base]
+

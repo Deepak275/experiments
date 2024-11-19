@@ -1,0 +1,11 @@
+"$TTL 1H
+$ORIGIN necplatforms.co.jp.
+
+
+11pd48._domainkey  IN TXT ( "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA08Ow1C9/UFTeucnl"
+"ZgVTC/l7DBixSmqDXGFg2tfPNmyWZ2/fuHWA/rqFBcX/g/oNiMb2Hyw4cYgs"
+"i4cW+M47yUwrU9t6xeeWOvZNf6Fstdjb3Y2mYnv5MD7ixtVbpbSv9vkwjmra"
+"lo7J6uEAiNSG/j6iEEQsoGDDwCUCCgptGLyVUXMSCfslsHK64mNh8g8nQLHP"
+"aIp/H9l5uX+TGT8GTkvCt3wTHRhUOXBrJmVwzPJk1GK/K14sBM3Pis1dZCfB"
+"NUPVoXvpiCBetXJaVkdlYZaTakUvY7+8ybEkecqIEZPN5EllqyvT+oXiN2mS"
+"26racCOq1iJZHrbUgknFduTluwIDAQAB" )"
